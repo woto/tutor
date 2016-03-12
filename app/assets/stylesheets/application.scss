@@ -1,0 +1,171 @@
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+$grid-columns:      24;
+$grid-gutter-width: 15px;
+
+$navbar-padding-y: 0;
+$navbar-brand-padding-y: .6rem;
+
+$btn-primary-color: #EFEFEF;
+$btn-primary-bg: #FF4081;
+$btn-primary-border: #FF0D5F;
+
+$btn-secondary-color: #EFEFEF;
+$btn-secondary-bg: #2C4C63;
+$btn-secondary-border: #484848;
+
+$gray-lightest: #FFF;
+
+$link-color: #FF4081;
+
+//$brand-primary: #0275d8
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 544px,
+  md: 768px,
+  lg: 992px,
+  xl: 992px 
+  //xl: 1200px 
+);
+
+$container-max-widths: (
+  sm: 576px,
+  md: 720px,
+  lg: 940px,
+  xl: 940px
+  //xl: 1140px
+);
+
+@import "bootstrap/scss/bootstrap";
+
+// .btn-group-justified were removed in Bootstrap 4
+@import "bootstrap_obsolete";
+
+html {
+//  font-size: 14px;
+//  font-family: 'Roboto', sans-serif;
+}
+//
+//@include media-breakpoint-up(sm) {
+//  html {
+//    font-size: 16px;
+//  }
+//}
+
+body {
+  @include media-breakpoint-up(md) {
+    background: #EFEFEF;
+  }
+}
+
+.navbar {
+  box-shadow: 0 0 5px 0 #C5C5C5, 0 0 3px;
+
+  .navbar-nav {
+
+    .nav-link:not(.btn) {
+      padding-top: 1.1rem;
+      padding-bottom: 1.1rem;
+    }
+
+    .nav-link.btn {
+      padding-top: .6rem;
+      padding-bottom: .6rem;
+      margin-top: .6rem;
+      margin-bottom: .6rem;
+      color: white;
+
+      @include hover-focus {
+        color: white;
+      }
+    }
+
+    .open > .nav-link.btn,
+    .active > .nav-link.btn,
+    .nav-link.open.btn,
+    .nav-link.active.btn {
+      @include plain-hover-focus {
+        color: white;
+      }
+    }
+  }
+}
+
+.b-jumbotron {
+  background: url(asset_path('default.jpg')) center;
+  padding: 1rem;
+
+  @include media-breakpoint-up(md) {
+    padding: 4rem;
+    h1 {
+      font-weight: 600;
+      font-size: 4rem;
+    }
+  }
+}
+
+.b-page-content {
+  padding: 1rem 2rem;
+  margin-bottom: 3rem;
+
+  @include media-breakpoint-up(md) {
+    background: white;
+    border: 1px solid #CCC;
+    border-radius: 0.3125em;
+    padding: 2rem;
+  }
+}
+
+.b-page-header {
+  margin: 2rem auto;
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+.form-control-label {
+  padding-left: 0;
+  // TODO Bootstrap bug!
+}
+
+.b-unhappy {
+  background: #efefef;
+  @extend .m-t-3;
+}
+
+.b-discipline {
+  background: #efefef;
+}
+
+.b-error {
+  margin-top: .3rem;
+  margin-bottom: 0;
+}
+
+.b-help {
+  margin-top: .3rem;
+  margin-bottom: 0;
+}
+
+// TODO Интересно смогут ли это как-нибудь устранить, потом посмотрю
+// Если label пустой и присутствует только для того чтобы произошло смещение контрола
+// (а у контрола offset мы сделать не можем, т.к. если label имеется, то при его наличии
+// ломается верстка), то мы его скрываем только на маленьких дисплеях, т.к. он добавляет
+// избыточную высоту.
+@include media-breakpoint-down(xs) {
+  label.form-control-label:empty {
+    height: .8rem;
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// TODO In Bottstrap 4 .hidden class were removed
+.hidden {
+  display: none !important;
+}

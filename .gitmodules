@@ -1,0 +1,6 @@
+[submodule "system/submodules/bootstrap"]
+	path = system/submodules/bootstrap
+	url = https://github.com/twbs/bootstrap
+[submodule "system/submodules/noUiSlider"]
+	path = system/submodules/noUiSlider
+	url = https://github.com/leongersen/noUiSlider

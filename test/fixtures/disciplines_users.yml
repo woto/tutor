@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  discipline_id: 
+  user_id: 
+  discipline_type: 1
+  areas: MyString
+  year: 1
+  grade: 1.5
+
+two:
+  discipline_id: 
+  user_id: 
+  discipline_type: 1
+  areas: MyString
+  year: 1
+  grade: 1.5

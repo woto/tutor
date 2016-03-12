@@ -1,0 +1,11 @@
+<li class="nav-item active">
+  <a class="nav-link" href="#"><%= icon('envelope fa-lg') %></a>
+</li>
+<li class="nav-item btn-group">
+  <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#"><%= user_name_helper || "Menu" %></a>
+  <div class="dropdown-menu dropdown-menu-right">
+    <%= link_to 'My Profile', public_user_profile_path(current_user), class: 'dropdown-item' %>
+    <%= link_to 'Edit Account', edit_user_registration_path, class: 'dropdown-item' %>
+    <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+  </div>
+</li>
