@@ -1,0 +1,19 @@
+<div class="row form-group">
+  <label class="col-sm-8">Teach Disciplines</label>
+  <div class="col-sm-16">
+    <%= f.fields_for :users_disciplines_form do |ud| %>
+
+      <b><%= ud.input :active, as: :boolean, label: "#{ud.object.model.discipline.title} #{ud.object.model.discipline.id}" %></b>
+
+      <div class="b-discipline card card-block">
+        <%= ud.input :discipline_areas, label: false, placeholder: "What are specific areas you're really great at?", wrapper: :vertical_form %>
+        <%= ud.input :discipline_year, wrapper: :vertical_btn_group_radion_and_checkboxes,
+          collection: Constants::YEARS, as: :radio_buttons, label: false %>
+        <%= content_tag :div, '', class: "r-discipline-grade-slider r-discipline_grade-slider-#{ud.index} m-t-2", data: {index: ud.index} %>
+        <%= ud.input :discipline_id, as: :hidden %>
+        <%= ud.input :discipline_grade %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/rails/sprockets.git
+  revision: 9db6aa1c8bec0c445c58d2783d7166f7c44a58f0
+  specs:
+    sprockets (4.0.0.beta2)
+      concurrent-ruby (~> 1.0)
+      rack (> 1, < 3)
+
 PATH
   remote: ../simple_form
   specs:
@@ -45,6 +53,10 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -161,9 +173,6 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     spring (1.6.4)
-    sprockets (3.5.2)
-      concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
     sprockets-rails (3.0.4)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
@@ -192,6 +201,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  babel-transpiler
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)
@@ -210,6 +220,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   simple_form!
   spring
+  sprockets!
   turbolinks (~> 5.0.0.beta)
   uglifier (>= 1.3.0)
   web-console (~> 2.0)

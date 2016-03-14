@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311062523) do
+ActiveRecord::Schema.define(version: 20160313011244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,20 +21,6 @@ ActiveRecord::Schema.define(version: 20160311062523) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "disciplines_users", force: :cascade do |t|
-    t.integer  "discipline_id"
-    t.integer  "user_id"
-    t.integer  "discipline_type"
-    t.string   "discipline_areas"
-    t.integer  "discipline_year"
-    t.float    "dicipline_grade"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "disciplines_users", ["discipline_id"], name: "index_disciplines_users_on_discipline_id", using: :btree
-  add_index "disciplines_users", ["user_id"], name: "index_disciplines_users_on_user_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "title"
@@ -76,7 +62,21 @@ ActiveRecord::Schema.define(version: 20160311062523) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "disciplines_users", "disciplines"
-  add_foreign_key "disciplines_users", "users"
+  create_table "users_disciplines", force: :cascade do |t|
+    t.integer  "discipline_id"
+    t.integer  "user_id"
+    t.integer  "discipline_type"
+    t.string   "discipline_areas"
+    t.integer  "discipline_year"
+    t.float    "discipline_grade"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "users_disciplines", ["discipline_id"], name: "index_users_disciplines_on_discipline_id", using: :btree
+  add_index "users_disciplines", ["user_id"], name: "index_users_disciplines_on_user_id", using: :btree
+
   add_foreign_key "locations", "users"
+  add_foreign_key "users_disciplines", "disciplines"
+  add_foreign_key "users_disciplines", "users"
 end

@@ -13,11 +13,12 @@
         <p><%= current_user.teach_fee %></p>
         <p><%= current_user.location %></p>
         <p><%= current_user.about %></p>
-        <% current_user.disciplines_users.each do |du| %>
+        <% current_user.users_disciplines.teach.each do |du| %>
+          <p> <%= du.discipline_type %> </p>
           <p> <%= du.discipline.title %> </p>
           <p> <%= du.discipline_areas %> </p>
           <p> <%= du.discipline_year %> </p>
-          <p> <%= du.dicipline_grade %> </p>
+          <p> <%= du.discipline_grade %> </p>
         <% end %>
 
 

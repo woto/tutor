@@ -15,3 +15,7 @@
 //= require bootstrap/js/dist/tab
 //= require bootstrap/js/dist/tooltip
 //= require bootstrap/js/dist/popover
+//
+//= require noUiSlider/distribute/nouislider.min
+//
+//= require user/profile

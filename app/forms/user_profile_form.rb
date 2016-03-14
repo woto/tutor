@@ -1,74 +1,70 @@
-class UserProfileForm < Reform::Form
-  #include Reform::Form::ModelValidations
-  include ActiveModel::ModelReflections
+class UserProfileForm
+  include ActiveModel::Model
+  include Extras
 
-  validates :undergraduate_school, :graduate_school, :first_name, :last_name, presence: true
-  validates :school_year, inclusion: { in: Constants::YEARS.map{|y| y.first.to_s} }
+  attr_accessor :users_disciplines_form
 
-  property :first_name
-  property :last_name
-  property :undergraduate_school
-  property :graduate_school
-  property :school_year
-  property :teach_fee
-  property :avatar
-  property :about
+  validates :undergraduate_school, :graduate_school, :first_name, presence: true
+  validates :school_year, inclusion: { in: Constants::YEARS.map(&:last)}
 
-  collection :disciplines_users, inherit: true,
-    prepopulator: :prepopulate_disciplines_users,
-    populator: :populate_disciplines_users do
-    property :discipline_areas
-    property :discipline_year
-    property :discipline_id
-    property :active, virtual: true
+  def initialize(args={})
+    super
+    self.users_disciplines_form = []
+  end
 
-    #include Reform::Form::ActiveRecord
-    extend Reform::Form::ModelValidations
+  def call(args={})
+    self.assign_attributes(args)
 
-    copy_validations_from DisciplinesUser
+    valid?
+    users_disciplines_form.select{|udf| udf.active == '1'}.each{|udf| udf.valid?}
+
+    return false
+  end
+
+  def school_year=(args)
+    @school_year = args.to_i
+  end
+
+  def prepopulate_users_disciplines_form!
+    self.users_disciplines_form = model.users_disciplines.ordered_by_discipline_title.map do |ud|
+      UsersDisciplinesForm.new(ud)
+    end
+
+    Discipline.all.order(:title).each do |discipline|
+      udf = users_disciplines_form.find{|udf| udf.model.discipline_id == discipline.id}
+      if udf
+        udf.active = true
+      else
+        index = find_insert_index(udf, discipline)
+        users_disciplines_form.insert(index, UsersDisciplinesForm.new(
+          UsersDisciplines.new(discipline: discipline, discipline_grade: 50)))
+      end
+    end
+  end
+
+  def users_disciplines_form_attributes=(args={})
+    args.each do |arg|
+      index, params = arg
+      active = params.delete(:active)
+      if (id = params[:id])
+        user_discipline = model.users_disciplines.find(id.to_i)
+        user_discipline.assign_attributes(params)
+      else
+        user_discipline = UsersDisciplines.new(params)
+      end
+      self.users_disciplines_form << UsersDisciplinesForm.new(
+        user_discipline, active: active, discipline_type: 'teach')
+    end
   end
 
   private
 
-  def prepopulate_disciplines_users(options)
-    Discipline.all.each do |discipline|
-      du = disciplines_users.find{|du| du.model.discipline_id == discipline.id}
-      if du
-        du.active = '1'
-      else
-        # TODO to rewrite better
-        arr = disciplines_users.map{|du| du.model.discipline.title}
-        arr << discipline.title
-        arr.sort!
-        index = arr.index(discipline.title)
-        disciplines_users.insert(index, DisciplinesUser.new(discipline: discipline))
-      end
-    end
-  end
-
-  def populate_disciplines_users(collection:, index:, fragment:, **)
-    item = collection.find{|du| du.model.discipline_id == fragment[:discipline_id].to_i}
-    # if adding discipline
-    if fragment[:active] == '1'
-      # if discipline already stored in db
-      if item
-        return item
-      # if new discipline
-      else
-        collection.insert(collection.length, DisciplinesUser.new(discipline_year: fragment[:discipline_year], 
-                                                     discipline_areas: fragment[:discipline_areas],
-                                                     discipline_year: fragment[:discipline_year],
-                                                     user_id: id,
-                                                     discipline_id: fragment[:discipline_id]))
-      end
-    # if removing discipline
-    else
-      # if discipline stored in db
-      if fragment[:active] == '0'
-        disciplines_users.destroy(item)
-      end
-      return skip!
-    end
+  def find_insert_index(udf, discipline)
+    # TODO rewrite better
+    arr = users_disciplines_form.map{|udf| udf.model.discipline.title}
+    arr << discipline.title
+    arr.sort!
+    arr.index(discipline.title)
   end
 
 end

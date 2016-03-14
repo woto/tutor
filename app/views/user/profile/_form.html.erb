@@ -1,0 +1,27 @@
+<%= simple_form_for @user_profile, url: user_profile_path, 
+  html: {method: :put}, as: :user_profile, wrapper: :horizontal_form do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :first_name %>
+  <%= f.input :last_name, hint: 'Only first letter shown to other users' %>
+  <%= f.input :undergraduate_school %>
+  <%= f.input :graduate_school %>
+  <%= f.input :school_year, :wrapper => :horizontal_btn_group_radion_and_checkboxes,
+    :collection => Constants::YEARS, :as => :radio_buttons, label: '' %>
+
+  <%= render 'disciplines', f: f %>
+
+  <%= f.input :teach_fee %>
+
+  <%= render 'locations' %>
+
+  <%= f.input :avatar, wrapper: :horizontal_custom_file %>
+  <%= f.input :about %>
+
+  <div class="form-group row m-t-2">
+    <div class="offset-sm-8 col-sm-16">
+      <%= f.button :submit, 'Update Profile', class: 'btn-primary' %>
+    </div>
+  </div>
+
+<% end %>
