@@ -7,8 +7,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><%= @meta_title %></title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= action_cable_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
     <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,100,100italic,300italic,400italic,500italic,700italic,900,900italic&subset=latin,cyrillic,cyrillic-ext' rel='stylesheet' type='text/css'> -->
   </head>
   <body>
