@@ -1,5 +1,4 @@
 class UserProfileForm
-  include ActiveModel::Model
   include Extras
 
   attr_accessor :users_disciplines_form
@@ -7,7 +6,7 @@ class UserProfileForm
   validates :undergraduate_school, :graduate_school, :first_name, :last_name, presence: true
   validates :school_year, inclusion: { in: Constants::YEARS.map(&:last), message: 'please choose year'}
 
-  def initialize(args={})
+  def initialize(model, options={})
     super
     self.users_disciplines_form = []
   end
@@ -22,7 +21,6 @@ class UserProfileForm
   end
 
   def school_year=(args)
-    #debugger
     @school_year = args.to_i
   end
 
@@ -61,7 +59,7 @@ class UserProfileForm
   private
 
   def find_insert_index(udf, discipline)
-    # TODO rewrite better
+    # TODO make in better
     arr = users_disciplines_form.map{|udf| udf.model.discipline.title}
     arr << discipline.title
     arr.sort!
