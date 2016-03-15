@@ -41,7 +41,7 @@ update_disciplines_cards = function() {
     if($(this).is(":checked")) {
       $(".b-discipline-card-" + index).removeClass('hidden');
     } else {
-      $(".b-discipline-card-" + index).addClass('hidden');
+      $(".b-discipline-card-" + index).addClass('hidden').addClass('fadeIn');
     }
   });
 }

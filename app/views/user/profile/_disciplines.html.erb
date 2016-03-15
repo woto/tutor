@@ -5,7 +5,7 @@
 
       <%= ud.input :active, as: :boolean, label: ud.object.model.discipline.title, wrapper_class: 'b-discipline-checkbox-wrapper', input_html: {class: "b-discipline-checkbox b-discipline-checkbox-#{ud.index}", data: {index: ud.index}} %>
 
-      <div class="b-discipline-card b-discipline-card-<%= ud.index %> card card-block" data-index="<%= ud.index %>">
+      <div class="b-discipline-card b-discipline-card-<%= ud.index %> animated card card-block" data-index="<%= ud.index %>">
         <%= ud.input :discipline_areas, label: false, placeholder: "What are specific areas you're really great at?", wrapper: :vertical_form %>
         <%= ud.input :discipline_year, wrapper: :vertical_btn_group_radion_and_checkboxes,
           collection: Constants::YEARS, as: :radio_buttons, label: false %>

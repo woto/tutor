@@ -7,3 +7,6 @@
 [submodule "system/submodules/Font-Awesome"]
 	path = system/submodules/Font-Awesome
 	url = https://github.com/FortAwesome/Font-Awesome
+[submodule "system/submodules/animate.css"]
+	path = system/submodules/animate.css
+	url = https://github.com/daneden/animate.css
