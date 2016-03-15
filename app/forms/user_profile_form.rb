@@ -4,8 +4,8 @@ class UserProfileForm
 
   attr_accessor :users_disciplines_form
 
-  validates :undergraduate_school, :graduate_school, :first_name, presence: true
-  validates :school_year, inclusion: { in: Constants::YEARS.map(&:last)}
+  validates :undergraduate_school, :graduate_school, :first_name, :last_name, presence: true
+  validates :school_year, inclusion: { in: Constants::YEARS.map(&:last), message: 'please choose year'}
 
   def initialize(args={})
     super
@@ -22,6 +22,7 @@ class UserProfileForm
   end
 
   def school_year=(args)
+    #debugger
     @school_year = args.to_i
   end
 

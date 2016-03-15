@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def auth_cols
-    content_tag :div, class: 'col-md-18 offset-md-3 col-lg-16 offset-lg-4 col-xl-14 offset-xl-5' do
+    content_tag :div, class: 'col-md-16 offset-md-4 col-lg-14 offset-lg-5 col-xl-12 offset-xl-6' do
       yield
     end
   end
@@ -40,6 +40,10 @@ module ApplicationHelper
   def user_name_helper
     tmp = [current_user.first_name, current_user.last_name].join(' ')
     tmp if tmp.present?
+  end
+
+  def icon(icon, css_class='')
+    content_tag :i, '', class: ["fa", "fa-#{icon}", css_class].join(' ')
   end
 
 end

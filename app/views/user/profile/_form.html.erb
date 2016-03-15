@@ -3,7 +3,7 @@
   <%= f.error_notification %>
 
   <%= f.input :first_name %>
-  <%= f.input :last_name, hint: 'Only first letter shown to other users' %>
+  <%= f.input :last_name, hint: 'only first letter shown to other users' %>
   <%= f.input :undergraduate_school %>
   <%= f.input :graduate_school %>
   <%= f.input :school_year, :wrapper => :horizontal_btn_group_radion_and_checkboxes,
@@ -15,8 +15,10 @@
 
   <%= render 'locations' %>
 
+  <%= f.input :phone, hint: 'visible only for ...' %>
+  <%= f.input :skype, hint: 'visible only for ...' %>
   <%= f.input :avatar, wrapper: :horizontal_custom_file %>
-  <%= f.input :about %>
+  <%= f.input :about, as: :text, input_html: {rows: 3} %>
 
   <div class="form-group row m-t-2">
     <div class="offset-sm-8 col-sm-16">

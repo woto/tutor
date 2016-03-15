@@ -8,7 +8,8 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+#gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', github: 'rails/sass-rails', branch: 'master'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -47,7 +48,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'devise'
+gem 'devise', '4.0.0.rc1'
+
 
 #gem 'bootstrap', '~> 4.0.0.alpha3'
 
@@ -55,12 +57,11 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 
-gem 'font-awesome-sass', '~> 4.5.0'
 gem 'simple_form', path: '../simple_form'
-gem 'puma'
 gem 'kaminari'
 gem 'carrierwave'
 gem 'reform'
 gem 'reform-rails'
-gem 'sprockets', github: 'rails/sprockets'
 gem 'babel-transpiler'
+gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: 'master'
+gem 'sprockets', github: 'rails/sprockets', branch: 'master'

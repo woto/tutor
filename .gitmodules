@@ -4,3 +4,6 @@
 [submodule "system/submodules/noUiSlider"]
 	path = system/submodules/noUiSlider
 	url = https://github.com/leongersen/noUiSlider
+[submodule "system/submodules/Font-Awesome"]
+	path = system/submodules/Font-Awesome
+	url = https://github.com/FortAwesome/Font-Awesome

@@ -16,8 +16,8 @@
 
 //= require noUiSlider/distribute/nouislider.min
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+$fa-font-path: '/Font-Awesome/fonts';
+@import 'Font-Awesome/scss/font-awesome';
 
 $grid-columns:      24;
 $grid-gutter-width: 15px;
@@ -146,8 +146,9 @@ body {
 }
 
 .form-control-label {
-  padding-left: 0;
   // TODO Bootstrap bug!
+  padding-left: 0;
+  font-size: 1.2rem;
 }
 
 .b-unhappy {
@@ -155,7 +156,7 @@ body {
   @extend .m-t-3;
 }
 
-.b-discipline {
+.b-discipline-card {
   background: #efefef;
 }
 
@@ -186,4 +187,18 @@ body {
 // TODO In Bottstrap 4 .hidden class were removed
 .hidden {
   display: none !important;
+}
+
+.b-discipline-grade-slider.noUi-background {
+  background: $btn-secondary-bg;
+  .noUi-origin {
+    background: #FAFAFA;
+  }
+}
+
+.b-discipline-checkbox-wrapper {
+  font-size: 1.2rem;
+  .checkbox {
+    margin-bottom: 0.5rem;
+  }
 }
