@@ -10,3 +10,6 @@
 [submodule "system/submodules/animate.css"]
 	path = system/submodules/animate.css
 	url = https://github.com/daneden/animate.css
+[submodule "system/submodules/selectize.js"]
+	path = system/submodules/selectize.js
+	url = https://github.com/selectize/selectize.js

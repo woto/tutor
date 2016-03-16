@@ -3,15 +3,48 @@
   <div class="col-sm-16">
     <%= f.fields_for :users_disciplines_form do |ud| %>
 
-      <%= ud.input :active, as: :boolean, label: ud.object.model.discipline.title, wrapper_class: 'b-discipline-checkbox-wrapper', input_html: {class: "b-discipline-checkbox b-discipline-checkbox-#{ud.index}", data: {index: ud.index}} %>
+      <%= ud.input :active,
+        as: :boolean,
+        label: ud.object.model.discipline.title,
+        wrapper_class: 'b-discipline-checkbox-wrapper',
+        input_html: {
+          class: "b-discipline-checkbox b-discipline-checkbox-#{ud.index}",
+          data: {
+            index: ud.index}} %>
 
-      <div class="b-discipline-card b-discipline-card-<%= ud.index %> animated card card-block" data-index="<%= ud.index %>">
-        <%= ud.input :discipline_areas, label: false, placeholder: "What are specific areas you're really great at?", wrapper: :vertical_form %>
-        <%= ud.input :discipline_year, wrapper: :vertical_btn_group_radion_and_checkboxes,
-          collection: Constants::YEARS, as: :radio_buttons, label: false %>
-        <%= content_tag :div, '', class: "b-discipline-grade-slider b-discipline-grade-slider-#{ud.index}", data: {index: ud.index} %>
+      <div class="b-discipline-card b-discipline-card-<%= ud.index %> animated" data-index="<%= ud.index %>">
+
+        <%= ud.input :discipline_areas,
+          label: false,
+          placeholder: "What are specific areas you're really great at?",
+          wrapper: :vertical_form,
+          input_html: { 
+            class: "b-discipline-areas-input b-discipline-areas-input-#{ud.index}",
+            data: {
+              index: ud.index,
+              discipline_areas_options: ud.object.model.discipline.discipline_areas.pluck('title').join(',') +
+                                        ((da = ud.object.discipline_areas.to_s).present? ? ",#{da}" : '')}} %>
+
+        <%= ud.input :discipline_year,
+          wrapper: :vertical_btn_group_radion_and_checkboxes,
+          collection: Constants::YEARS,
+          as: :radio_buttons,
+          label: false %>
+
+        <%= content_tag :div,
+          '',
+          class: "b-discipline-grade-slider b-discipline-grade-slider-#{ud.index}",
+          data: {
+            index: ud.index} %>
+
         <%= ud.input :discipline_id, as: :hidden %>
-        <%= ud.input :discipline_grade, as: :hidden, input_html: {class: "b-discipline-grade-input b-discipline-grade-input-#{ud.index}", data: {index: ud.index}} %>
+
+        <%= ud.input :discipline_grade,
+          as: :hidden,
+          input_html: {
+            class: "b-discipline-grade-input b-discipline-grade-input-#{ud.index}",
+            data: {
+              index: ud.index}} %>
       </div>
 
     <% end %>

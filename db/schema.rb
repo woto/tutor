@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315151233) do
+ActiveRecord::Schema.define(version: 20160316142004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "discipline_areas", force: :cascade do |t|
+    t.integer  "discipline_id"
+    t.string   "title"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "discipline_areas", ["discipline_id"], name: "index_discipline_areas_on_discipline_id", using: :btree
 
   create_table "disciplines", force: :cascade do |t|
     t.string   "title"
@@ -68,7 +77,7 @@ ActiveRecord::Schema.define(version: 20160315151233) do
     t.integer  "discipline_id"
     t.integer  "user_id"
     t.integer  "discipline_type"
-    t.string   "discipline_areas"
+    t.string   "discipline_areas",              array: true
     t.integer  "discipline_year"
     t.float    "discipline_grade"
     t.datetime "created_at",       null: false
@@ -78,6 +87,7 @@ ActiveRecord::Schema.define(version: 20160315151233) do
   add_index "users_disciplines", ["discipline_id"], name: "index_users_disciplines_on_discipline_id", using: :btree
   add_index "users_disciplines", ["user_id"], name: "index_users_disciplines_on_user_id", using: :btree
 
+  add_foreign_key "discipline_areas", "disciplines"
   add_foreign_key "locations", "users"
   add_foreign_key "users_disciplines", "disciplines"
   add_foreign_key "users_disciplines", "users"

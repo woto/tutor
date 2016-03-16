@@ -30,6 +30,8 @@
 //= require bootstrap/js/dist/popover
 //
 //= require noUiSlider/distribute/nouislider.min
+//
+//= require selectize.js/dist/js/standalone/selectize
 
 document.addEventListener("turbolinks:load", function() {
   $(".btn-group .btn [type=radio]:checked").parent().addClass('active')
@@ -52,7 +54,7 @@ document.addEventListener("turbolinks:load", () => {
 
 $(document).on("click", ".b-discipline-checkbox", function(){
   update_disciplines_cards();
-})
+});
 
 document.addEventListener("turbolinks:load", function() {
   $(".b-discipline-grade-input").each(function(){
@@ -72,4 +74,32 @@ document.addEventListener("turbolinks:load", function() {
       this.value = values[handle];
     });
   })
-})
+});
+
+document.addEventListener("turbolinks:load", function() {
+  $('.b-discipline-areas-input').each(function() {
+
+    index = this.dataset.index;
+    discipline_areas_options = this.dataset.disciplineAreasOptions;
+    options = discipline_areas_options.split(',').map(function(value, index) {
+      return {value: value, text: value} });
+    $(this).selectize({
+      //maxItems: null,
+      //maxOptions: 100,
+      //valueField: 'text',
+      //labelField: 'text',
+      //searchField: 'text',
+      //sortField: 'text',
+
+      delimiter: ',',
+      plugins: ['remove_button'],
+      options: options,
+      create: function(input) {
+        return {
+          value: input,
+          text: input
+        }
+      }
+    });
+  })
+});

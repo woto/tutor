@@ -15,6 +15,9 @@
 // */
 
 //= require noUiSlider/distribute/nouislider.min
+//
+//= require selectize.js/dist/css/selectize
+//= require selectize.js/dist/css/selectize.bootstrap3
 
 @import 'animate.css/animate';
 
@@ -150,7 +153,7 @@ body {
 .form-control-label {
   // TODO Bootstrap bug!
   padding-left: 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .b-unhappy {
@@ -159,7 +162,18 @@ body {
 }
 
 .b-discipline-card {
-  background: #efefef;
+  margin-bottom: $card-spacer-y;
+
+  @include media-breakpoint-up(sm) {
+    position: relative;
+    display: block;
+    background: #efefef;
+    @include border-radius($card-border-radius);
+    box-shadow: inset 0 0 0 $card-border-width $card-border-color;
+
+    @include clearfix;
+    padding: $card-spacer-x;
+  }
 }
 
 .b-error {
@@ -199,7 +213,6 @@ body {
 }
 
 .b-discipline-checkbox-wrapper {
-  font-size: 1.2rem;
   .checkbox {
     margin-bottom: 0.5rem;
   }

@@ -27,9 +27,9 @@ class User::ProfileController < ApplicationController
 
   def user_profile_params
     params.require(:user_profile).permit(:undergraduate_school, :graduate_school, :school_year,
-      :teach_fee, :first_name, :last_name, :location, :avatar, :about,
+      :teach_fee, :first_name, :last_name, :location, :avatar, :about, :phone, :skype,
       :users_disciplines_form_attributes => [:id, :active, :discipline_id, :discipline_areas,
-                                             :discipline_year, :discipline_grade,:discipline_type])
+                                             :discipline_year, :discipline_grade, :discipline_type])
   end
 
 end
