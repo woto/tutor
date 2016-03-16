@@ -9,16 +9,14 @@
   <%= f.input :school_year, :wrapper => :horizontal_btn_group_radion_and_checkboxes,
     :collection => Constants::YEARS, :as => :radio_buttons, label: '' %>
 
-  <%= render 'disciplines', f: f %>
-
-  <%= f.input :teach_fee %>
-
-  <%= render 'locations' %>
-
   <%= f.input :phone, hint: 'visible only for ...' %>
   <%= f.input :skype, hint: 'visible only for ...' %>
   <%= f.input :avatar, wrapper: :horizontal_custom_file %>
   <%= f.input :about, as: :text, input_html: {rows: 3} %>
+
+  <%= render 'disciplines', f: f %>
+  <%= f.input :teach_fee %>
+  <%= render 'locations' %>
 
   <div class="form-group row m-t-2">
     <div class="offset-sm-8 col-sm-16">

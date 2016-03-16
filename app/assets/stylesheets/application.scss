@@ -182,7 +182,6 @@ body {
 }
 
 .b-help {
-  margin-top: .3rem;
   margin-bottom: 0;
 }
 
@@ -215,5 +214,15 @@ body {
 .b-discipline-checkbox-wrapper {
   .checkbox {
     margin-bottom: 0.5rem;
+    font-size: 1.1rem;
   }
+}
+
+// Temporary bootstrap workaround due empty checkbox (because of Rails forms convention)
+.btn-group > .btn:first-of-type:not(:last-of-type):not(.dropdown-toggle),
+.btn-group > .dropdown-toggle:not(:first-of-type) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: $btn-border-radius;
+  border-bottom-left-radius: $btn-border-radius;
 }
