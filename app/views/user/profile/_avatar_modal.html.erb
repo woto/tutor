@@ -1,0 +1,41 @@
+<div class="modal fade" id="avatar-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Avatar</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @user_avatar_form,
+          url: user_avatar_path,
+          html: {method: :put, class: 'b-user-avatar-form'},
+          remote: true,
+          wrapper: :horizontal_form do |f| %>
+          <div class="container">
+            <%= f.input :remote_avatar_url, input_html: {class: "b-user-avatar-input"} %>
+            <%= f.input :avatar, input_html: {class: "b-user-avatar-file"}, wrapper: :horizontal_custom_file %>
+          </div>
+          <%= f.button :submit, 'Upload', class: 'btn btn-sm btn-primary' %>
+        <% end %>
+      </div>
+      <div class="b-user-avatar-placeholder text-center m-b-1">
+        <%# image_tag @user_avatar_form.avatar, class: 'b-user-avatar-image', style: "width: 150px" %>
+      </div>
+      <div class="modal-footer">
+        <%= simple_form_for @user_avatar_crop_form,
+        url: user_avatar_crop_path,
+        html: {method: :put},
+        remote: true do |f| %>
+          <%= f.input :w, as: :hidden %>
+          <%= f.input :h, as: :hidden %>
+          <%= f.input :x, as: :hidden %>
+          <%= f.input :y, as: :hidden %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.button :submit, 'Save changes', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

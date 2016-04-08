@@ -9,8 +9,7 @@ module Extras
 
     self.model = model
 
-    model.attributes.each do |attr|
-      m = attr.first
+    model.attributes.each_key do |m|
       singleton_class.class_eval{attr_writer m} unless respond_to? "#{m}="
       singleton_class.class_eval{attr_reader m} unless respond_to? m
     end

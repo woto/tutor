@@ -7,4 +7,6 @@ class UsersDisciplines < ActiveRecord::Base
   belongs_to :user, required: true
 
   scope :ordered_by_discipline_title, -> { includes(:discipline).order('disciplines.title') }
+
+  searchkick suggest: [:discipline_areas]
 end

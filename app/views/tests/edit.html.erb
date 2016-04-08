@@ -1,0 +1,8 @@
+<%= image_tag current_user.avatar, style: 'width: 100px' %>
+
+<%= simple_form_for current_user, url: test_path do |f| %>
+  <%= f.input :avatar %>
+  <%= f.input :avatar_cache %>
+  <%= f.input :email %>
+  <%= f.button :submit %>
+<% end %>

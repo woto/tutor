@@ -1,29 +1,97 @@
-<% @meta_title = "#{current_user.first_name} #{current_user.last_name}" %>
-<%= meta_title %>
+<% @meta_title = "#{current_user.first_name} #{current_user.last_name.first}." %>
 
-<%= container do %>
+<%= container class: 'm-t-3' do %>
   <%= row do %>
-    <div class="col-xs-24">
+    <div class="col-md-18">
       <%= page_content do %>
-        <p><%= image_tag current_user.avatar %></p>
 
-        <p><%= current_user.undergraduate_school %></p>
-        <p><%= current_user.graduate_school %></p>
-        <p><%= current_user.school_year %></p>
-        <p><%= current_user.teach_fee %></p>
-        <p><%= current_user.location %></p>
-        <p><%= current_user.about %></p>
-        <% current_user.users_disciplines.teach.each do |du| %>
-          <p> <%= du.discipline_type %> </p>
-          <p> <%= du.discipline.title %> </p>
-          <p> <%= du.discipline_areas %> </p>
-          <p> <%= du.discipline_year %> </p>
-          <p> <%= du.discipline_grade %> </p>
+        <%= row do %>
+
+          <div class="col-sm-6">
+            <%= image_tag current_user.avatar, class: 'b-avatar b-avatar--circle img-fluid center-block'  %>
+          </div>
+
+          <div class="col-sm-17 offset-sm-1">
+
+            <h2 class="b-user-name text-xs-center text-sm-left"> <%= @meta_title %> </h2>
+            <h5 class="text-warning text-xs-center text-sm-left"><%= discipline_grade_stars 86 %> <small><a href="#">based on 6-s reviews</a></small></h5>
+
+            <ul class="list-inline text-xs-center text-sm-left">
+              <li class="list-inline-item">
+                <%= icon 'trophy text-success' %> 1 Year on site,
+              </li>
+              <li class="list-inline-item">
+                <%= icon 'check text-success' %> Confirmed contacts,
+              </li>
+              <li class="list-inline-item">
+                <%= icon 'check text-success' %> Knowledges and certificates checked
+              </li>
+              <li class="list-inline-item">
+                <%= icon 'check text-success' %> Average response in 24 hours
+              </li>
+            </ul>
+
+          </div>
         <% end %>
 
+        <div class="clearfix m-b-3"></div>
 
-        <%= link_to 'Edit Profile', edit_user_profile_path, class: 'btn btn-primary' %>
+        <h4 class="m-b-1"> My knowledges: </h4>
+        <%= render 'disciplines_table', object: current_user.users_disciplines.teach %>
+
+        <div class='card card-block card-inverse card-danger text-center m-y-3' style="background-color: #333; border-color: #333;">
+          <h4 class="card-title m-b-1">My average rate: <%= current_user.teach_fee %>$</h4>
+          <a href="#" class="btn btn-primary btn-lg m-b-1">Request for teach</a>
+          <br />
+          <a href="#" class="text-muted">* You can save money if you know interesting me disciplines</a>
+        </div>
+
+        <h4 class="m-t-3 m-b-1"> Education: </h4>
+
+        <div> 
+          Undergraduate School: 
+          <%= current_user.undergraduate_school %>
+        </div>
+
+        <div>
+          Graduate School: 
+          <%= current_user.graduate_school %>,
+          year: <%= current_user.school_year %>yr
+        </div>
+
+        <p><%= current_user.location %></p>
+
+        <h4 class="m-t-3 m-b-1"> About me: </h4>
+
+        <p><%= current_user.about %></p>
+
+        <h4 class="m-t-3 m-b-1"> Want to learn: </h4>
+        <%= render 'disciplines_table', object: current_user.users_disciplines.learn %>
+
       <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="list-group m-b-1">
+        <!--
+        <a href="#" class="list-group-item active">
+          Cras justo odio
+        </a>
+        -->
+        <%= link_to 'Offer a teaching', '#', class: 'list-group-item' %>
+        <%= link_to 'Edit Locations', '#', class: 'list-group-item' %>
+      </div>
+
+      <%= page_content do %>
+        <%= link_to 'Edit Profile', edit_user_profile_path, class: 'btn btn-outline-primary' %>
+      <% end %>
+
+      <%= page_content do %>
+        <h5 class="m-b-1">Reccomend me:</h5>
+        <%= render 'social_like' %>
+      <% end %>
+
+
     </div>
   <% end %>
 <% end %>

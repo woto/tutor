@@ -1,13 +1,15 @@
 module ApplicationHelper
 
-  def container
-    content_tag :div, class: 'container' do
+  def container(options={})
+    options[:class] = ['container', options[:class] ].compact
+    content_tag :div, options do
       yield
     end
   end
 
-  def row
-    content_tag :div, class: 'row' do
+  def row(options={})
+    options[:class] = ['row', options[:class] ].compact
+    content_tag :div, options do
       yield
     end
   end
@@ -44,6 +46,28 @@ module ApplicationHelper
 
   def icon(icon, css_class='')
     content_tag :i, '', class: ["fa", "fa-#{icon}", css_class].join(' ')
+  end
+
+  def discipline_grade_stars(grade)
+    div, mod = grade.divmod(20)
+    stars = 0
+    capture do
+      div.times do |n|
+        stars += 1
+        concat(icon 'star')
+      end
+
+      if mod.round >= 10
+        stars += 1
+        concat (icon 'star-half-o')
+      end
+
+      (5-stars).times.each do
+        concat (icon 'star-o')
+      end
+
+      #concat grade
+    end
   end
 
 end

@@ -1,22 +1,36 @@
-<%= simple_form_for @user_profile, url: user_profile_path, 
-  html: {method: :put}, as: :user_profile, wrapper: :horizontal_form do |f| %>
+<%= render 'avatar_modal' %>
+
+<%= simple_form_for @user_profile_form, url: user_profile_path, 
+  html: {method: :put, class: 'b-profile-form'}, wrapper: :horizontal_form do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :first_name %>
-  <%= f.input :last_name, hint: 'only first letter shown to other users' %>
+  <%= f.input :last_name, hint: 'visible only to those users, whom you made a deal' %>
+
+  <%# f.input :avatar, wrapper: :horizontal_custom_file, as: :file %>
+
+  <div class="row form-group">
+    <label class="col-sm-8 form-control-label"><abbr title="required">*</abbr> Avatar</label>
+    <div class="col-sm-16">
+      <a href="#" data-toggle="modal" data-target="#avatar-modal">
+        <%= image_tag f.object.avatar, style: 'width: 64px; height: 64px;', class: 'b-avatar b-avatar--circle' %>
+      </a>
+    </div>
+  </div>
+
   <%= f.input :undergraduate_school %>
   <%= f.input :graduate_school %>
   <%= f.input :school_year, :wrapper => :horizontal_btn_group_radion_and_checkboxes,
     :collection => Constants::YEARS, :as => :radio_buttons, label: '' %>
 
-  <%= f.input :phone, hint: 'visible only for ...' %>
-  <%= f.input :skype, hint: 'visible only for ...' %>
-  <%= f.input :avatar, wrapper: :horizontal_custom_file %>
-  <%= f.input :about, as: :text, input_html: {rows: 3} %>
+  <%= f.input :phone, hint: 'visible only to those users, whom you made a deal' %>
+  <%= f.input :skype, hint: 'visible only to those users, whom you made a deal' %>
+  <%= f.input :about, as: :text, input_html: {rows: 2, class: 'b-textarea--auto-size'} %>
 
-  <%= render 'disciplines', f: f %>
-  <%= f.input :teach_fee %>
   <%= render 'locations' %>
+
+  <%= render 'disciplines', f: f, type: 'teach', placeholder: "What are specific areas you're really great at?" %>
+  <%= f.input :teach_fee %>
 
   <div class="form-group row m-t-2">
     <div class="offset-sm-8 col-sm-16">

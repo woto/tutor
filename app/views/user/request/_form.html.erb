@@ -1,0 +1,11 @@
+<%= simple_form_for @request_form, url: user_request_path,
+  html: {method: :put, class: 'b-profile-form'}, wrapper: :horizontal_form do |f| %>
+  <%= f.error_notification %>
+    <%= render 'user/profile/disciplines', f: f, type: 'learn', placeholder: 'Specify areas you want to learn' %>
+    <%= f.input :learn_fee %>
+    <div class="form-group row m-t-2">
+      <div class="offset-sm-8 col-sm-16">
+        <%= f.button :submit, 'Update Profile', class: 'btn-primary' %>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,15 @@
+img = $('<img />', {
+  src: '<%= j(@user_avatar_form.avatar.url) %>?random=' + Date.now(),
+})
+
+$('.b-user-avatar-placeholder').html(img);
+
+img.cropbox({
+  width: 120,
+  height: 120 
+}).on('cropbox', function( event, results, img ) {
+  $('[name="user_avatar_crop_form[x]"]').val(results.cropX);
+  $('[name="user_avatar_crop_form[y]"]').val(results.cropY);
+  $('[name="user_avatar_crop_form[w]"]').val(results.cropW);
+  $('[name="user_avatar_crop_form[h]"]').val(results.cropH);
+});

@@ -14,23 +14,42 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-light navbar-full bg-faded">
+    <nav class="navbar navbar-fixed-bottom navbar-light bg-faded">
+      <a class="navbar-brand" href="#">Fixed bottom</a>
+    </nav>
+
+    <div class="collapse" id="exCollapsingNavbar">
+      <div class="p-a-1">
+        <h4>Collapsed content</h4>
+        <span class="text-muted">Toggleable via the navbar brand.</span>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-dark bg-inverse navbar-full">
       <div class="container">
+
+        <button class="hidden-sm-up pull-right navbar-toggler" style="padding-top: 1.1rem; padding-bottom: 1.1rem;" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+          <%= icon 'bars' %>
+        </button>
+
         <%= link_to root_path, class: 'navbar-brand' do %>
           <%= image_tag "logo_big.png", class: 'hidden-xs-down' %>
           <%= image_tag "logo_small.png", class: 'hidden-sm-up', style: 'height: 35px' %>
         <% end %>
 
-        <ul class="nav navbar-nav pull-xs-right">
-          <% if user_signed_in? %>
-            <%= render 'menu_authenticated' %>
-          <% else %>
-            <%= render 'menu_nonauthenticated' %>
-          <% end %>
-          <li class="nav-item">
-            <a class="nav-link btn btn-sm btn-primary" href="#">Need a tutor</a>
-          </li>
-        </ul>
+        <div class="hidden-xs-down">
+          <ul class="nav navbar-nav pull-xs-right">
+            <% if user_signed_in? %>
+              <%= render 'menu_authenticated' %>
+            <% else %>
+              <%= render 'menu_nonauthenticated' %>
+            <% end %>
+            <li class="nav-item">
+              <%= link_to 'Need a tutor', edit_user_request_path, class: 'nav-link btn btn-sm btn-danger' %>
+            </li>
+          </ul>
+        </div>
+
       </div>
     </nav>
 

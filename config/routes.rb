@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :test
+  resource :user, :controller => "user"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Serve websocket cable requests in-process
@@ -13,6 +15,9 @@ Rails.application.routes.draw do
 
   namespace :user do
     resource :profile, only: [:edit, :update], controller: 'profile'
+    resource :avatar, only: [:update], controller: 'avatar'
+    resource :avatar_crop, only: [:update], controller: 'avatar_crop'
+    resource :request, only: [:edit, :update], controller: 'request'
   end
 
   Rails.application.routes.draw do

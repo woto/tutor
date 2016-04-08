@@ -1,69 +1,56 @@
 class UserProfileForm
   include Extras
-
-  attr_accessor :users_disciplines_form
+  include UserAvatarActiveModel
+  include UserAvatarValidations
+  include Concerns::DisciplinesConcern
 
   validates :undergraduate_school, :graduate_school, :first_name, :last_name, presence: true
   validates :school_year, inclusion: { in: Constants::YEARS.map(&:last), message: 'please choose year'}
 
-  def initialize(model, options={})
-    super
-    self.users_disciplines_form = []
+  def call(args={})
+
+    self.assign_attributes args
+
+    valid = ([valid?] + active_disciplines_valid?).all?
+
+    if valid
+      debugger
+      run_callbacks :save do
+        model.assign_attributes({
+          first_name: first_name,
+          last_name: last_name,
+          undergraduate_school: undergraduate_school,
+          graduate_school: graduate_school,
+          school_year: school_year,
+          phone: phone,
+          skype: skype,
+          about: about,
+          teach_fee: teach_fee
+        })
+
+        process_disciplines_form('teach')
+        model.save!
+      end
+      true
+    else
+      errors.add(:base, '')
+      false
+    end
   end
 
-  def call(args={})
-    self.assign_attributes(args)
-
-    valid?
-    users_disciplines_form.select{|udf| udf.active == '1'}.each{|udf| udf.valid?}
-
-    return false
+  def users_disciplines_form_attributes=(args={})
+    args.transform_values do |v|
+      v['discipline_type'] = 'teach'
+    end
+    super
   end
 
   def school_year=(args)
     @school_year = args.to_i
   end
 
-  def prepopulate_users_disciplines_form!
-    self.users_disciplines_form = model.users_disciplines.ordered_by_discipline_title.map do |ud|
-      UsersDisciplinesForm.new(ud)
-    end
-
-    Discipline.all.order(:title).each do |discipline|
-      udf = users_disciplines_form.find{|udf| udf.model.discipline_id == discipline.id}
-      if udf
-        udf.active = true
-      else
-        index = find_insert_index(udf, discipline)
-        users_disciplines_form.insert(index, UsersDisciplinesForm.new(
-          UsersDisciplines.new(discipline: discipline, discipline_grade: 50)))
-      end
-    end
-  end
-
-  def users_disciplines_form_attributes=(args={})
-    args.each do |arg|
-      index, params = arg
-      active = params.delete(:active)
-      if (id = params[:id])
-        user_discipline = model.users_disciplines.find(id.to_i)
-        user_discipline.assign_attributes(params)
-      else
-        user_discipline = UsersDisciplines.new(params)
-      end
-      self.users_disciplines_form << UsersDisciplinesForm.new(
-        user_discipline, active: active, discipline_type: 'teach')
-    end
-  end
-
-  private
-
-  def find_insert_index(udf, discipline)
-    # TODO make in better
-    arr = users_disciplines_form.map{|udf| udf.model.discipline.title}
-    arr << discipline.title
-    arr.sort!
-    arr.index(discipline.title)
+  def prepopulate_user_profile_form!
+    prepopuleate_disciplines_form!('teach')
   end
 
 end

@@ -18,6 +18,8 @@
 //
 //= require selectize.js/dist/css/selectize
 //= require selectize.js/dist/css/selectize.bootstrap3
+//
+//= require jquery-cropbox/jquery.cropbox
 
 @import 'animate.css/animate';
 
@@ -30,19 +32,19 @@ $grid-gutter-width: 15px;
 $navbar-padding-y: 0;
 $navbar-brand-padding-y: .6rem;
 
-$btn-primary-color: #EFEFEF;
-$btn-primary-bg: #FF4081;
-$btn-primary-border: #FF0D5F;
+//$btn-primary-color: #EFEFEF;
+//$btn-primary-bg: #FF4081;
+//$btn-primary-border: #FF0D5F;
+//
+//$btn-secondary-color: #EFEFEF;
+//$btn-secondary-bg: #2C4C63;
+//$btn-secondary-border: #484848;
 
-$btn-secondary-color: #EFEFEF;
-$btn-secondary-bg: #2C4C63;
-$btn-secondary-border: #484848;
+//$gray-lightest: #FFF;
 
-$gray-lightest: #FFF;
+//$link-color: #2C4C63;
 
-$link-color: #FF4081;
-
-//$brand-primary: #0275d8
+//$brand-primary: #0275d8;
 
 $grid-breakpoints: (
   xs: 0,
@@ -65,6 +67,19 @@ $container-max-widths: (
 
 // .btn-group-justified were removed in Bootstrap 4
 @import "bootstrap_obsolete";
+
+$line-height-computed: 20px;
+$padding-small-vertical: 100px;
+$padding-base-vertical: 8px;
+$padding-large-vertical: 100px;
+$padding-small-horizontal: 100px;
+$padding-base-horizontal: 10px;
+$padding-large-horizontal: 100px;
+$font-size-large: 100px;
+$font-size-small: 100px;
+
+@import 'bootstrap-social/bootstrap-social.scss';
+
 
 html {
 //  font-size: 14px;
@@ -156,9 +171,15 @@ body {
   font-size: 1.1rem;
 }
 
-.b-unhappy {
+.b-card--grey {
   background: #efefef;
-  @extend .m-t-3;
+}
+
+.b-user-name {
+  @include media-breakpoint-down(xs) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .b-discipline-card {
@@ -199,9 +220,21 @@ body {
   }
 }
 
-// TODO In Bottstrap 4 .hidden class were removed
+// TODO In Bootstrap 4 .hidden class were removed
 .hidden {
   display: none !important;
+}
+
+// TODO In Bootstrap 4 .text-center were removed
+.text-center {
+  text-align: center;
+}
+
+// TODO In Bootstrap 4 .center-block were removed(?)
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .b-discipline-grade-slider.noUi-background {
@@ -213,9 +246,22 @@ body {
 
 .b-discipline-checkbox-wrapper {
   .checkbox {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
   }
+}
+
+
+.b-avatar {
+  border: 1px solid $btn-secondary-border;
+}
+
+.cropFrame {
+  @extend .b-avatar;
+}
+
+.b-avatar--circle {
+  @extend .img-circle;
 }
 
 // Temporary bootstrap workaround due empty checkbox (because of Rails forms convention)
@@ -225,4 +271,26 @@ body {
   border-top-right-radius: 0;
   border-top-left-radius: $btn-border-radius;
   border-bottom-left-radius: $btn-border-radius;
+}
+
+
+.b-table-unpadded-first-in-tr {
+  tr > :first-child {
+    padding-left: 0;
+  }
+}
+
+.b-strikethrough {
+  display: table;
+  white-space: nowrap;
+  &:before, &:after {
+    border-top: 1px solid #EFEFEF;
+    content: '';
+    display: table-cell;
+    position: relative;
+    top: 0.5em;
+    width: 45%;
+  }
+  &:before { right: 1.5%; }
+  &:after { left: 1.5%; }
 }

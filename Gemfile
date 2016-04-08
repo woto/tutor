@@ -49,7 +49,10 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', '4.0.0.rc1'
-
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google'
 
 #gem 'bootstrap', '~> 4.0.0.alpha3'
 
@@ -65,3 +68,7 @@ gem 'reform-rails'
 gem 'babel-transpiler'
 gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: 'master'
 gem 'sprockets', github: 'rails/sprockets', branch: 'master'
+gem 'mini_magick'
+# TODO used branch untill conflict not resolved
+gem 'remotipart', github: 'urielhdz/remotipart', branch: 'rails5/headers-already-set'
+gem 'searchkick'

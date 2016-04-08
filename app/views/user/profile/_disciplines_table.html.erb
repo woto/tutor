@@ -1,0 +1,36 @@
+<table class="table b-table-unpadded-first-in-tr">
+  <thead>
+    <tr>
+      <th>
+        Discipline
+      </th>
+      <th>
+        Areas
+      </th>
+      <th>
+        Degree
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% object.each do |du| %>
+    <tr>
+      <td>
+        <h5>
+          <%= du.discipline.title %>
+        </h5>
+      </td>
+      <td>
+        <%= du.discipline_areas.gsub(',', ', ') %>
+      </td>
+      <td>
+        <span style="white-space: nowrap">
+          <span class="text-success"><%= discipline_grade_stars du.discipline_grade %></span>
+          <%= du.discipline_year %> year
+        </span>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

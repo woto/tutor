@@ -15,7 +15,13 @@
 //= require turbolinks
 //# require_tree .
 //
+//= require jquery.remotipart
+//
+//= require hammer.js/hammer.js
+//
 //= require tether
+//
+//= require jquery-cropbox/jquery.cropbox
 //
 //= require bootstrap/js/dist/util
 //= require bootstrap/js/dist/alert
@@ -32,6 +38,10 @@
 //= require noUiSlider/distribute/nouislider.min
 //
 //= require selectize.js/dist/js/standalone/selectize
+//
+//= require typeahead.js/dist/typeahead.bundle
+//
+//= require autosize/dist/autosize
 
 document.addEventListener("turbolinks:load", function() {
   $(".btn-group .btn [type=radio]:checked").parent().addClass('active')
@@ -103,3 +113,12 @@ document.addEventListener("turbolinks:load", function() {
     });
   })
 });
+
+//$(document).on('change', '.b-user-avatar-input', function(){
+//  $(".b-user-avatar-form").trigger('submit.rails');
+//})
+
+
+document.addEventListener("turbolinks:load", function() {
+  autosize($('.b-textarea--auto-size'));
+})

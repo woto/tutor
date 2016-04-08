@@ -13,3 +13,21 @@
 [submodule "system/submodules/selectize.js"]
 	path = system/submodules/selectize.js
 	url = https://github.com/selectize/selectize.js
+[submodule "system/submodules/Jcrop"]
+	path = system/submodules/Jcrop
+	url = https://github.com/tapmodo/Jcrop
+[submodule "system/submodules/jquery-cropbox"]
+	path = system/submodules/jquery-cropbox
+	url = https://github.com/acornejo/jquery-cropbox
+[submodule "system/submodules/hammer.js"]
+	path = system/submodules/hammer.js
+	url = https://github.com/hammerjs/hammer.js
+[submodule "system/submodules/typeahead.js"]
+	path = system/submodules/typeahead.js
+	url = https://github.com/twitter/typeahead.js/
+[submodule "system/submodules/autosize"]
+	path = system/submodules/autosize
+	url = https://github.com/jackmoore/autosize
+[submodule "system/submodules/bootstrap-social"]
+	path = system/submodules/bootstrap-social
+	url = https://github.com/lipis/bootstrap-social

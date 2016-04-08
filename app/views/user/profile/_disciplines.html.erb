@@ -1,5 +1,5 @@
 <div class="row form-group">
-  <label class="col-sm-8 form-control-label">Teach Disciplines</label>
+  <label class="col-sm-8 form-control-label"><%= type.capitalize %> Disciplines</label>
   <div class="col-sm-16">
     <%= f.fields_for :users_disciplines_form do |ud| %>
 
@@ -16,7 +16,7 @@
 
         <%= ud.input :discipline_areas,
           label: false,
-          placeholder: "What are specific areas you're really great at?",
+          placeholder: placeholder,
           wrapper: :vertical_form,
           input_html: { 
             class: "b-discipline-areas-input b-discipline-areas-input-#{ud.index}",
@@ -45,6 +45,8 @@
             class: "b-discipline-grade-input b-discipline-grade-input-#{ud.index}",
             data: {
               index: ud.index}} %>
+
+        <%= ud.input :id, as: :hidden %>
       </div>
 
     <% end %>
